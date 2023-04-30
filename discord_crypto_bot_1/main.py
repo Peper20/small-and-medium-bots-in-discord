@@ -19,13 +19,21 @@
 
 # requirements imports begin {
 
-import os
+import os as _os
 
 
 from dotenv import load_dotenv as _load_dotenv
 from asyncio import run as _run
 
 # } requirements imports end
+
+from crypto_tracker import start_updating as _start_updating
+
+# } relative imports end
+
+
+
+# relative imports begin {
 
 
 
@@ -44,6 +52,10 @@ async def main():
 
 
 	_load_dotenv()
+
+	_start_updating()
+
+
 
 
 # } file body end

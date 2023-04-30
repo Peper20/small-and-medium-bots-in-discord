@@ -2,7 +2,7 @@
 Модуль для переодического обновления базы данных.
 
 Запросы отправляемые к api, обновляются переодически, потому нет смысла делать новый запрос для каждой команды пользователя.
-Будет рациональнее сохранять результат каждые N времени (смотрите db_updater, file body, _update_db_job, @_schedule.every(30).seconds.do)?,
+Будет рациональнее сохранять результат каждые N времени (смотрите db_updater, file body, __update_db_job, @_schedule.every(30).seconds.do)?,
 И передавать результат пользователю.
 """
 
@@ -13,7 +13,6 @@ import schedule as _schedule
 import os as _os
 
 
-from dotenv import load_dotenv as _load_dotenv
 from requests import request as _request
 from functools import wraps as _wraps
 from time import sleep as _sleep
@@ -25,13 +24,7 @@ from decimal import Decimal as _Decimal
 
 # relative imports begin {
 
-if __name__ == '__main__':
-    _load_dotenv()
-
-    from db import database
-    
-else:
-    from .db import database
+from db import Database
 
 # } relative imports end
 
@@ -65,14 +58,21 @@ def _get_crypto_ranks():
 
 @_schedule.every(30).seconds.do
 @_catch_exceptions
-def _update_db_job():
+def __update_db_job():
     ranks = _get_crypto_ranks()
-    database.update(ranks)
+    __update_db_job.database.update(ranks)
     print("!!")
 
 
 
 def start_updating(delay: int | float = 1):
+    __update_db_job.database = Database(
+        host=_os.getenv('DB_HOST'),
+        user=_os.getenv('DB_USER'),
+        password=_os.getenv('DB_PASSWORD'),
+        database=_os.getenv('DB_NAME'),
+    )
+
     while True:
         try:
             _schedule.run_pending()
@@ -89,8 +89,8 @@ def start_updating(delay: int | float = 1):
 # other begin {
 
 if __name__ == '__main__':
-    start_updating()
-
+    # start_updating()
+    pass
 
 __all__ = [n for n in globals() if n[:1] != '_']
 

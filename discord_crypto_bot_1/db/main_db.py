@@ -44,13 +44,6 @@ class Database(Base_db):
 		# """)
 
 
-database = Database(
-	host=_os.getenv('DB_HOST'),
-	user=_os.getenv('DB_USER'),
-	password=_os.getenv('DB_PASSWORD'),
-	database=_os.getenv('DB_NAME'),
-)
-
 # } file body end
 
 
