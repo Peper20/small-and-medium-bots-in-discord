@@ -2,3 +2,4 @@ python-dotenv
 schedule
 requests
 psycopg2
+py-cord

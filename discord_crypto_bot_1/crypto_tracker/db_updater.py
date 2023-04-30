@@ -72,12 +72,9 @@ def start_updating(delay: int | float = 1):
     )
 
     while True:
-        try:
-            _schedule.run_pending()
-            _sleep(delay)
+        _schedule.run_pending()
+        _sleep(delay)
 
-        except KeyboardInterrupt:
-            break
 
 # } file body end
 

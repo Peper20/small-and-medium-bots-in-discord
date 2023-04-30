@@ -28,11 +28,12 @@ from threading import Thread
 
 # } requirements imports end
 
-from crypto_tracker import start_updating as _start_updating
+
 
 # } relative imports end
 
-
+from crypto_tracker import start_updating as _start_updating
+from discord_bot import run_bot as _run_bot
 
 # relative imports begin {
 
@@ -53,13 +54,17 @@ async def main():
 
 
 	_load_dotenv()
+
+	threads = []
 	
-	db_updater_thread = Thread(target=_start_updating)
+	threads.append(Thread(target=_start_updating))
+	threads.append(Thread(target=_run_bot))
 
-	db_updater_thread.start()
+	for thread in threads:
+		thread.start()
 
-
-
+	for thread in threads:
+		thread.join()
 
 # } file body end
 
