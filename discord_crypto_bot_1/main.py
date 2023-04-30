@@ -6,6 +6,10 @@
 Для корректной работы проекта требуется определить следующие переменные окружения:
 	@DISCORD_BOT_TOKEN: токен для бота в дискорде
 	@CRYPTO_RANKS_API_TOKEN: токен для api coinranking.com
+	@DB_HOST: адрес для подключение к БД на postgres
+	@DB_USER: юзер для подключение к БД на postgres
+	@DB_PASSWORD: пароль для подключение к БД на postgres
+	@DB_NAME: БД для подключение к БД на postgres
 
 Желательно сделать это в файле .env в корневой папке проекта.
 Для загрузки переменных окружения используется dotenv.load_dotenv (смотрите main.py, file body, await main)
