@@ -10,6 +10,7 @@
 # requirements imports begin {
 
 import os as _os
+from dotenv import load_dotenv as _load_dotenv
 
 # } requirements imports end
 
@@ -17,7 +18,13 @@ import os as _os
 
 # relative imports begin {
 
-from .base_db import Base_db
+if __name__ == '__main__':
+    _load_dotenv()
+
+    from base_db import Base_db
+    
+else:
+    from .base_db import Base_db
 
 # } relative imports end
 
@@ -27,7 +34,7 @@ from .base_db import Base_db
 
 class Database(Base_db):
 	def __init__(self, /, **kwargs):
-		super().__init__(*args, **kwargs)
+		super().__init__(**kwargs)
 
 		# self.execute("""
 			# CREATE TABLE IF NOT EXISTS currencies(
