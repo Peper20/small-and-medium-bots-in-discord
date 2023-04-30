@@ -61,8 +61,6 @@ def _get_crypto_ranks():
 def __update_db_job():
     ranks = _get_crypto_ranks()
     __update_db_job.database.update(ranks)
-    print("!!")
-
 
 
 def start_updating(delay: int | float = 1):
@@ -73,7 +71,7 @@ def start_updating(delay: int | float = 1):
         database=_os.getenv('DB_NAME'),
     )
 
-    while False:
+    while True:
         try:
             _schedule.run_pending()
             _sleep(delay)

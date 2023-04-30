@@ -24,6 +24,7 @@ import os as _os
 
 from dotenv import load_dotenv as _load_dotenv
 from asyncio import run as _run
+from threading import Thread
 
 # } requirements imports end
 
@@ -52,7 +53,10 @@ async def main():
 
 
 	_load_dotenv()
-	_start_updating()
+	
+	db_updater_thread = Thread(target=_start_updating)
+
+	db_updater_thread.start()
 
 
 
