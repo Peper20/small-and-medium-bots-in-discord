@@ -52,7 +52,6 @@ async def main():
 
 
 	_load_dotenv()
-
 	_start_updating()
 
 

@@ -18,13 +18,7 @@ from dotenv import load_dotenv as _load_dotenv
 
 # relative imports begin {
 
-if __name__ == '__main__':
-    _load_dotenv()
-
-    from base_db import Base_db
-    
-else:
-    from .base_db import Base_db
+from .base_db import Base_db
 
 # } relative imports end
 
@@ -36,12 +30,29 @@ class Database(Base_db):
 	def __init__(self, /, **kwargs):
 		super().__init__(**kwargs)
 
-		# self.execute("""
-			# CREATE TABLE IF NOT EXISTS currencies(
-				# id SERIAL PRIMARY KEY,
-				# payload TEXT
-			# )
-		# """)
+		self.execute("""
+			CREATE TABLE IF NOT EXISTS currencies(
+				id SERIAL PRIMARY KEY,
+				payload TEXT
+			)
+		""")
+
+		self.execute("""
+			INSERT INTO currencies (id, payload)
+			VALUES (1, '')
+			ON CONFLICT DO NOTHING
+		""")
+		self.commit()
+
+
+	def update(self, payload):
+		self.execute(f"""
+			UPDATE currencies SET
+			payload='{payload}'
+			WHERE id={1}
+		""")
+
+		self.commit()
 
 
 # } file body end

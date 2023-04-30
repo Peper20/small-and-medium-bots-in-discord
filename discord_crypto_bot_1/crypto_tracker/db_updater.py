@@ -73,11 +73,10 @@ def start_updating(delay: int | float = 1):
         database=_os.getenv('DB_NAME'),
     )
 
-    while True:
+    while False:
         try:
             _schedule.run_pending()
             _sleep(delay)
-
 
         except KeyboardInterrupt:
             break
@@ -87,10 +86,6 @@ def start_updating(delay: int | float = 1):
 
 
 # other begin {
-
-if __name__ == '__main__':
-    # start_updating()
-    pass
 
 __all__ = [n for n in globals() if n[:1] != '_']
 
