@@ -24,18 +24,19 @@ import os as _os
 
 from dotenv import load_dotenv as _load_dotenv
 from asyncio import run as _run
-from threading import Thread
+from threading import Thread as _Thread
 
 # } requirements imports end
 
 
 
-# } relative imports end
+# relative imports begin {
 
+from __version__ import *
 from crypto_tracker import start_updating as _start_updating
 from discord_bot import run_bot as _run_bot
 
-# relative imports begin {
+# } relative imports end
 
 
 
@@ -57,8 +58,8 @@ async def main():
 
 	threads = []
 	
-	threads.append(Thread(target=_start_updating))
-	threads.append(Thread(target=_run_bot))
+	# threads.append(_Thread(target=_start_updating))
+	threads.append(_Thread(target=_run_bot))
 
 	for thread in threads:
 		thread.start()
@@ -76,6 +77,6 @@ if __name__ == '__main__':
 	_run(main())
 
 
-__all__ = [n for n in globals() if n[:1] != '_']
+__all__ = [n for n in globals() if n[0] != '_']
 
 # } other end
