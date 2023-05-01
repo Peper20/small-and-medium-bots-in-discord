@@ -82,6 +82,6 @@ def start_updating(delay: int | float = 1):
 
 # other begin {
 
-__all__ = [n for n in globals() if n[:1] != '_']
+__all__ = [n for n in globals() if n[0] != '_']
 
 # } other end
