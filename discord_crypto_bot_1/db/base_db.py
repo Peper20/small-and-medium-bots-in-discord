@@ -5,6 +5,7 @@
 
 # requirements imports begin {
 
+from functools import wraps as _wraps
 import psycopg2 as _psycopg2
 
 # } requirements imports end
@@ -17,13 +18,9 @@ class Base_db:
 	connection = None
 
 
-	def __init__(self, /, *, host, user, password, database):
-		self.connection = _psycopg2.connect(
-			host=host,
-			user=user,
-			password=password,
-			database=database,
-		)
+	@_wraps(_psycopg2.connect)
+	def __init__(self, /, **kwargs):
+		self.connection = _psycopg2.connect(**kwargs)
 
 
 	def fetchone(self, /, command):
