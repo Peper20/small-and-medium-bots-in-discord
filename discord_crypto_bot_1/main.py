@@ -57,10 +57,11 @@ async def main():
 
 	_load_dotenv()
 
-	threads = []
-	
-	threads.append(_Thread(target=_start_updating))
-	threads.append(_Thread(target=_run_bot))
+	threads = [
+		_Thread(target=_start_updating),
+		_Thread(target=_run_bot),
+	]
+
 
 	for thread in threads:
 		thread.start()
