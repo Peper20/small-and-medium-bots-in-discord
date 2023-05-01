@@ -10,7 +10,10 @@
 # requirements imports begin {
 
 import os as _os
+
+
 from dotenv import load_dotenv as _load_dotenv
+from loguru import logger as _logger
 
 # } requirements imports end
 
@@ -29,6 +32,8 @@ from .base_db import Base_db
 class Database(Base_db):
 	def __init__(self, /, **kwargs):
 		super().__init__(**kwargs)
+
+		_logger.success('The new connection is probably opened successfully (If there were no exceptions and/or other logs, and this log was recorded, most likely the program does not work correctly)')
 
 		self.execute("""
 			CREATE TABLE IF NOT EXISTS currencies(

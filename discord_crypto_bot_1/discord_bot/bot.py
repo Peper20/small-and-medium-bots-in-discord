@@ -1,6 +1,7 @@
 # requirements imports begin {
 import os as _os
 import discord as _discord
+from loguru import logger as _logger
 
 # } requirements imports end
 
@@ -19,18 +20,13 @@ from .cogs import cogs
 bot = _discord.Bot(intents=_discord.Intents.all())
 
 
-from decimal import Decimal
-
-@bot.slash_command()
-async def command(ctx, arg: int):
-	await ctx.message.answer(f'{arg}')
-
-
 def run_bot():
 	for cog in cogs:
 		bot.add_cog(cog(bot))
 
-	bot.run(_os.getenv('DISCORD_BOT_TOKEN'))
+	_logger.success('All cogs added successfully')
+
+	return bot.run(_os.getenv('DISCORD_BOT_TOKEN'))
 
 # } file body end
 

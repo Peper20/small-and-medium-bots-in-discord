@@ -3,3 +3,4 @@ schedule
 requests
 psycopg2
 py-cord
+loguru

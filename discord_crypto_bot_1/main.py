@@ -25,6 +25,7 @@ import os as _os
 from dotenv import load_dotenv as _load_dotenv
 from asyncio import run as _run
 from threading import Thread as _Thread
+from loguru import logger as _logger
 
 # } requirements imports end
 
@@ -58,11 +59,13 @@ async def main():
 
 	threads = []
 	
-	# threads.append(_Thread(target=_start_updating))
+	threads.append(_Thread(target=_start_updating))
 	threads.append(_Thread(target=_run_bot))
 
 	for thread in threads:
 		thread.start()
+
+	_logger.success('All subprocesses started successfully')
 
 	for thread in threads:
 		thread.join()

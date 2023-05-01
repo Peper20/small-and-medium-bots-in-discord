@@ -9,13 +9,15 @@ from discord.ext import commands as _commands
 
 # } requirements imports end
 
-# } file body end
+
 
 # file body begin {
 
 class Crypto(_commands.Cog):
 	def __init__(self, /, bot):
 		self.bot = bot
+
+# } file body end
 
 
 
